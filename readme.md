@@ -25,3 +25,16 @@ Regardless, fun experiment and learning experience.
 Takeaways
 * For MVP/starting out just have all of the jobs in next api routes with qstash
 * Migrate to a dedicated server if background jobs start taking a while
+
+
+script to send concurrent requests (used when testing out the golang server)
+```
+seq 1 50 | xargs -I{} -n1 -P5 bash -c 'curl "http://localhost:8080/enqueue-job"; sleep 1'
+```
+
+seq to get 1-50
+xargs to pass numbers into bash script. P flag sends 5 at a time.
+bash script just runs curl command and then sleeps for a second
+
+
+overall: send 50 requests 5 at a time per second
